@@ -40,6 +40,9 @@ var argv = require('optimist')
   .alias('v', 'draft')
   .default('v', '07')
   .describe('n', 'Do not generate a README.md file in the output directory')
+  .alias('l', 'level')
+  .default('l', 0)
+  .describe('l', 'Increase heading level by the given number, default 0, range 0..4')
   .describe('link-*', 'Add this file as a link the explain the * attribute, e.g. --link-abstract=abstract.md')
   .check(function(args) {
     if (!fs.existsSync(args.input)) {
@@ -80,6 +83,7 @@ var schemaDir = argv.x === '-' ? '' : argv.x ? path.resolve(argv.x) : outDir;
 var target = fs.statSync(schemaPath);
 const readme = argv.n !== true;
 const schemaExtension = argv.e || 'schema.json';
+const headingPrefix = (Number(argv.l) > 0 && Number(argv.l) < 5) ? '#'.repeat(Number(argv.l)) : '';
 
 if (argv.s){
   ajv.addMetaSchema(require(path.resolve(argv.s)));
@@ -122,7 +126,7 @@ if (target.isDirectory()) {
       return Promise.reduce(files, readSchemaFile, schemaPathMap)
         .then(schemaMap => {
           logger.info('finished reading all *.%s files in %s, beginning processing….', schemaExtension, schemaPath);
-          return Schema.process(schemaMap, schemaPath, outDir, schemaDir, metaElements, readme, docs);
+          return Schema.process(schemaMap, schemaPath, outDir, schemaDir, metaElements, readme, docs, headingPrefix);
         })
         .then(() => {
           logger.info('Processing complete.');

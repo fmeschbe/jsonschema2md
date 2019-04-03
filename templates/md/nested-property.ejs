@@ -5,10 +5,10 @@
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
  */ %>
 
-#### <%=name %>
+<%= headingPrefix %>#### <%=name %>
 
 <% if (schema.title) { %>
-##### <%= schema.title %>
+<%= headingPrefix %>##### <%= schema.title %>
 
 <% } %>
     
@@ -41,7 +41,7 @@ The value of this property **must** be equal to:
 The value of this property **must** be equal to one of the [known values below](#<%=nameSlug %>-known-values).
 <% } else { %>
 
-##### <%=name %> Type
+<%= headingPrefix %>##### <%=name %> Type
 
 <% if (schema.type==="string") { %>
 <%- include("string-type",{schema:schema,_:_}) %>
@@ -68,7 +68,7 @@ Unknown type `<%= schema.type %>`.
 <% }} %>
 
 <% if (schema.enum!==undefined||schema["meta:enum"]!==undefined) { %>
-##### <%=name %> Known Values
+<%= headingPrefix %>##### <%=name %> Known Values
 
 | Value | Description |
 |-------|-------------|
@@ -80,14 +80,14 @@ Unknown type `<%= schema.type %>`.
 
 
 <% if (examples && examples.length == 1) { %>
-##### <%=name %> Example
+<%= headingPrefix %>##### <%=name %> Example
 
 
 ```json
 <%- examples[0] %>
 ```
 <% } else if (examples && examples.length > 1) { %>
-##### <%=name %> Examples
+<%= headingPrefix %>##### <%=name %> Examples
 <%  _.forEach(examples, example => { %>
 
 ```json

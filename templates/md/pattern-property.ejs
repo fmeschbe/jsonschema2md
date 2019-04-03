@@ -5,7 +5,7 @@
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
  */ %>
 
-### Pattern: `<%=name %>`
+<%= headingPrefix %>### Pattern: `<%=name %>`
 
 Applies to all properties that match the regular expression `<%=name %>`
 
@@ -40,7 +40,7 @@ The value of this property **must** be equal to:
 The value of this properties with this pattern **must** be equal to one of the [known values below](#<%=name %>-known-values).
 <% } else { %>
 
-#### Pattern <%=name %> Type
+<%= headingPrefix %>#### Pattern <%=name %> Type
 
 <% if (schema.type==="string") { %>
 <%- include("string-type",{schema:schema,_:_}) %>
@@ -65,7 +65,7 @@ Unknown type `<%= schema.type %>`.
 <% }} %>
 
 <% if (schema.enum!==undefined||schema["meta:enum"]!==undefined) { %>
-#### Pattern <%=name %> Known Values
+<%= headingPrefix %>#### Pattern <%=name %> Known Values
 
 | Value | Description |
 |-------|-------------|
@@ -77,14 +77,14 @@ Unknown type `<%= schema.type %>`.
 
 
 <% if (examples && examples.length == 1) { %>
-#### <%=name %> Example
+<%= headingPrefix %>#### <%=name %> Example
 
 
 ```json
 <%- examples[0] %>
 ```
 <% } else if (examples && examples.length > 1) { %>
-#### Pattern <%=name %> Examples
+<%= headingPrefix %>#### Pattern <%=name %> Examples
 <%  _.forEach(examples, example => { %>
 
 ```json
