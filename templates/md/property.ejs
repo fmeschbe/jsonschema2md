@@ -5,10 +5,10 @@
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
  */ %>
 
-## <%=name %>
+### <%=name %>
 
 <% if (schema.title) { %>
-### <%= schema.title %>
+#### <%= schema.title %>
 
 <% } %>
 
@@ -45,7 +45,7 @@ The value of this property **must** be equal to:
 The value of this property **must** be equal to one of the [known values below](#<%=nameSlug %>-known-values).
 <% } else { %>
 
-### <%=name %> Type
+#### <%=name %> Type
 
 <% if (schema.type==="string") { %>
 <%- include("string-type",{schema:schema,_:_}) %>
@@ -76,7 +76,7 @@ Unknown type `<%= schema.type %>`.
 <% }} %>
 
 <% if (schema.enum!==undefined||schema["meta:enum"]!==undefined) { %>
-### <%=name %> Known Values
+#### <%=name %> Known Values
 
 | Value | Description |
 |-------|-------------|
@@ -88,14 +88,14 @@ Unknown type `<%= schema.type %>`.
 
 
 <% if (examples && examples.length == 1) { %>
-### <%=name %> Example
+#### <%=name %> Example
 
 
 ```json
 <%- examples[0] %>
 ```
 <% } else if (examples && examples.length > 1) { %>
-### <%=name %> Examples
+#### <%=name %> Examples
 <%  _.forEach(examples, example => { %>
 
 ```json
